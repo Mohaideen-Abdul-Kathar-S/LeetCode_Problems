@@ -1,0 +1,38 @@
+from collections import Counter
+
+class Solution(object):
+    def minCost(self, basket1, basket2):
+        total = basket1 + basket2
+        count = Counter(total)
+        
+        # Step 1: Check if possible
+        for val in count.values():
+            if val % 2 != 0:
+                return -1
+
+        # Step 2: Count excess in each basket
+        c1 = Counter(basket1)
+        c2 = Counter(basket2)
+        
+        extra1 = []
+        extra2 = []
+        
+        for item in count:
+            diff = c1[item] - count[item] // 2
+            if diff > 0:
+                extra1.extend([item] * diff)
+            elif diff < 0:
+                extra2.extend([item] * (-diff))
+
+        # Step 3: Minimize cost by sorting
+        extra1.sort()
+        extra2.sort(reverse=True)  # so smallest in extra1 goes with largest in extra2
+
+        # Step 4: Use minimum element in total for "double swap" if needed
+        min_elem = min(total)
+        cost = 0
+
+        for x, y in zip(extra1, extra2):
+            cost += min(2 * min_elem, min(x, y))
+
+        return cost
