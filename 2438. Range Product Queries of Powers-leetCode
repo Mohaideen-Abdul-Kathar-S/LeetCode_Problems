@@ -1,0 +1,25 @@
+class Solution(object):
+    def productQueries(self, n, qs):
+        """
+        :type n: int
+        :type queries: List[List[int]]
+        :rtype: List[int]
+        """
+        pow = []
+        bit = 1
+        while n > 0:
+            if n & 1:
+                pow.append(bit)
+            bit <<= 1
+            n >>= 1
+
+
+        pow = sorted(pow)
+
+        lis = []
+        for m in qs:
+            l = 1
+            for i in range(m[0],m[1]+1):
+                l = (l*pow[i])%((10**9)+7)
+            lis.append(l)
+        return lis
