@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isGood(int[] nums) {
+        int max = Arrays.stream(nums).max().orElseThrow();
+
+        if (nums.length != max + 1) return false;
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        for (int i = 1; i < max; i++) {
+            if (map.getOrDefault(i, 0) != 1) return false;
+        }
+
+        if (map.getOrDefault(max, 0) != 2) return false;
+
+        return true;
+    }
+}
