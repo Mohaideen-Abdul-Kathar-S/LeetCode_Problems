@@ -1,0 +1,17 @@
+class Solution(object):
+    def getRow(self, row):
+        """
+        :type rowIndex: int
+        :rtype: List[int]
+        """
+        lis = [[1]]
+        emp = []
+        for i in range(0,row):
+            emp.append(1)
+            
+            for j in range(len(lis[i])-1):
+                emp.append(lis[i][j]+lis[i][j+1])
+            emp.append(1)
+            lis.append(emp)
+            emp=[]
+        return lis[-1]
