@@ -1,0 +1,41 @@
+class Solution(object):
+    def sortMatrix(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        n = len(grid)
+        lis = []
+        for i in range(0,n):
+            lis.append(grid[i][i])
+        lis = sorted(lis)[::-1]
+        for i in range(0,n):
+            grid[i][i]=lis[i]
+
+        for k in range(1,n):
+            lis = []
+            for i in range(0,n):
+                if(i+k<n):
+                    lis.append(grid[i+k][i])
+                else: break
+            lis = sorted(lis)[::-1]
+            for i in range(0,n):
+                if(i+k<n):
+                    grid[i+k][i]=lis[i]
+                else: break
+
+        for k in range(1,n):
+            lis = []
+            for i in range(0,n):
+                if(i-k>=0):
+                    lis.append(grid[i-k][i])
+                
+            lis = sorted(lis)
+            for i in range(0,n):
+                if(i-k>=0):
+                 
+                    grid[i-k][i]=lis[i-k]
+                
+            
+
+        return grid
