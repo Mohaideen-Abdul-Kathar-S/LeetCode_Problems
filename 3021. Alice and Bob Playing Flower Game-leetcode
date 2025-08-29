@@ -1,0 +1,10 @@
+class Solution(object):
+    def flowerGame(self, n, m):
+        """
+        :type n: int
+        :type m: int
+        :rtype: int
+        """
+        on,en = (n+1)//2,n//2
+        om,em = (m+1)//2,m//2
+        return on*em + en*om 
