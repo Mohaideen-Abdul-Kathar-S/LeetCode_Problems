@@ -1,0 +1,22 @@
+class Solution(object):
+    def numberOfPairs(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: int
+        """
+        def check(mat,cal,points,n,m):
+            for i,ch in enumerate(points):
+                if(i!=n and m != i and mat[0]>=ch[0]>=cal[0] and mat[1]<=ch[1]<=cal[1]):
+                    return False
+            return True
+
+        c=0
+        for i,mat in enumerate(points):
+            x1,y1 = mat[0],mat[1]
+         
+            for fn,cal in enumerate(points):
+                if(i!=fn):
+                    if(x1>=cal[0] and y1<=cal[1] and check(mat,cal,points,i,fn)):
+                        c+=1
+                        
+        return c
