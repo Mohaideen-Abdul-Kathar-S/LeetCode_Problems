@@ -1,0 +1,17 @@
+class Solution {
+    public int maxFreqSum(String s) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        s.chars().forEach(c -> {
+            char ch = (char) c;
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        });
+        String vow = "aeiou";
+        int m1 =0,m2 = 0;
+        for(Character c : map.keySet()){
+            if(vow.contains(String.valueOf(c))){
+                if(m1<map.get(c)) m1=map.get(c);}
+            else if(m2<map.get(c)){ m2=map.get(c);}
+        }
+        return m1+m2;
+    }
+}
