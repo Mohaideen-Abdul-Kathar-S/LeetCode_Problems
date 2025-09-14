@@ -1,0 +1,36 @@
+class Solution {
+    public String[] spellchecker(String[] wordlist, String[] queries) {
+        ArrayList<String> word = new ArrayList<>(Arrays.asList(wordlist));
+        String[] qqq = wordlist;
+
+        ArrayList<String> Vword = new ArrayList<>(
+            Arrays.stream(wordlist)
+                  .map(String::toUpperCase)                  // Convert to uppercase
+                  .map(w -> w.replaceAll("[AEIOU]", "A"))   // Replace all vowels with 'A'
+                  .toList()
+        );
+
+        ArrayList<String> Dword = new ArrayList<>(
+            Arrays.stream(qqq)
+                  .map(String::toUpperCase)
+                  .toList()
+        );
+
+        ArrayList<String> qu = new ArrayList<>(Arrays.asList(queries));
+        ArrayList<String> res = new ArrayList<>();
+
+        for (String s : qu) {
+            if (word.contains(s)) {
+                res.add(s);
+            } else if (Dword.indexOf(s.toUpperCase()) != -1) {
+                res.add(word.get(Dword.indexOf(s.toUpperCase())));
+            } else if (Vword.indexOf(s.toUpperCase().replaceAll("[AEIOU]", "A")) != -1) {
+                res.add(word.get(Vword.indexOf(s.toUpperCase().replaceAll("[AEIOU]", "A"))));
+            } else {
+                res.add("");
+            }
+        }
+
+        return res.toArray(new String[0]);
+    }
+}
