@@ -1,0 +1,24 @@
+class Solution {
+    public int maxFrequencyElements(int[] nums) {
+        HashMap<Integer,Integer> fr = new HashMap<>();
+        for(Integer n : nums){
+            fr.put(n,fr.getOrDefault(n,0)+1);
+        }
+        int max =0,c=0;
+        for(Integer n:fr.values() ){
+            if(max<n) {
+                max=n;
+                
+            }
+           
+        }
+        for(Integer n:fr.values() ){
+            if(max==n) {
+                c++;
+                
+            }
+           
+        }
+        return c*max;
+    }
+}
