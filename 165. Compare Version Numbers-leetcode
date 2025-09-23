@@ -1,0 +1,26 @@
+class Solution:
+    def compareVersion(self, v1: str, v2: str) -> int:
+        d1 = v1.split(".")
+        for i in range(len(d1)):
+            d1[i] = str(int(d1[i]))   # normalize
+        d2 = v2.split(".")
+        for i in range(len(d2)):
+            d2[i] = str(int(d2[i]))   # normalize
+
+        for i in range(0, max(len(d1), len(d2))):
+            if i < len(d1):
+                j_val = int(d1[i])
+            else:
+                j_val = 0
+
+            if i < len(d2):
+                k_val = int(d2[i])
+            else:
+                k_val = 0
+
+            if j_val < k_val:
+                return -1
+            if j_val > k_val:
+                return 1
+
+        return 0
