@@ -1,0 +1,23 @@
+class Solution(object):
+    def minimumTotal(self, tri):
+        """
+        :type tri: List[List[int]]
+        :rtype: int
+        """
+        memo = {}
+
+        def Rfind(tri, i, j):
+            # If already computed, return
+            if (i, j) in memo:
+                return memo[(i, j)]
+
+            # Base case: last row
+            if i == len(tri) - 1:
+                memo[(i, j)] = tri[i][j]
+                return tri[i][j]
+
+            # Recursive case
+            memo[(i, j)] = tri[i][j] + min(Rfind(tri, i+1, j), Rfind(tri, i+1, j+1))
+            return memo[(i, j)]
+
+        return Rfind(tri, 0, 0)
