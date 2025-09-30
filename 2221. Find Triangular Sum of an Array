@@ -1,0 +1,14 @@
+class Solution(object):
+    def triangularSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        res = 0
+        for i in range(n):
+            for j in range(len(nums)-1):
+                nums[j]=(nums[j]+nums[j+1])%10
+            res = nums[-1]
+            del nums[-1]
+        return res
