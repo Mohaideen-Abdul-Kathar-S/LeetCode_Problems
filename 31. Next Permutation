@@ -1,0 +1,33 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n = nums.length;
+        int i = n-2;
+        while(i>=0 && nums[i]>=nums[i+1]){
+            i--;
+        }
+       
+        if(i<0) {
+            Arrays.sort(nums);
+            return;
+        }
+        
+        int j=n-1;
+        while(nums[j]<=nums[i]){
+            j--;
+        }
+
+        int t = nums[i];
+        nums[i]=nums[j];
+        nums[j]=t;
+       int p = i+1;
+       int max = n-1;
+        while(p<max){
+            t = nums[p];
+            nums[p]=nums[max];
+            nums[max]=t;
+            p++;
+            max--;
+        }
+      
+    }
+}
