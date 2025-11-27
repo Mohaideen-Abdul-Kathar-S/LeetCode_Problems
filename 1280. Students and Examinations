@@ -1,0 +1,28 @@
+SELECT 
+    student_id,
+    student_name,
+    subject_name,
+    NVL(attended_exams, 0) AS attended_exams
+FROM (
+    SELECT 
+        sc.student_id,
+        sc.student_name,
+        sc.subject_name,
+        e.attended_exams
+    FROM (
+        SELECT *
+        FROM students s
+        CROSS JOIN subjects ss
+    ) sc
+    FULL OUTER JOIN (
+        SELECT 
+            student_id,
+            subject_name,
+            COUNT(*) AS attended_exams
+        FROM examinations
+        GROUP BY student_id, subject_name
+    ) e
+        ON sc.student_id = e.student_id
+       AND sc.subject_name = e.subject_name
+) t
+ORDER BY student_id,subject_name;
