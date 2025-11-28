@@ -1,0 +1,2 @@
+/* Write your PL/SQL query statement below */
+select s.user_id,nvl(c.ok,0.00) as confirmation_rate from signups s full outer join (select user_id, round(count(case when action='confirmed' then 1 end)/count(user_id),2) as ok from confirmations group by user_id) c on s.user_id = c.user_id
