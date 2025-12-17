@@ -1,0 +1,36 @@
+class Solution {
+    static int cal(int[] nums,int mid){
+        int total = 0;
+        int days =1;
+        for(int i:nums){
+            if(i + total <= mid){
+                total += i;
+            }else{
+                total = i;
+                days++;
+            }
+        }
+        return days;
+    }
+    public int shipWithinDays(int[] nums, int days) {
+        int high = 0;
+        int low = 0;
+        for(int i:nums){
+            low = Math.max(low,i);
+            high += i;
+        }
+        int ans =0;
+
+        while(low<=high){
+            int mid = (low+high)/2;
+            int day = cal(nums,mid);
+            if(day<=days){
+                high = mid-1;
+                ans = mid;
+            }else{
+                low = mid+1;
+            }
+        }
+        return ans;
+    }
+}
