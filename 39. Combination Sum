@@ -1,0 +1,27 @@
+class Solution {
+    List<List<Integer>> arr = new ArrayList<>();
+    void find(int ind,int[] cand,int t,List<Integer> ls){
+        // System.out.println(ind);
+        if(ind==cand.length){
+        if(t==0) {
+            arr.add(new ArrayList<>(ls));
+            
+           
+        }
+         return;
+        }
+       
+        if(cand[ind]<=t){
+        ls.add(cand[ind]);
+        find(ind, cand, t-cand[ind], ls);
+        ls.remove(ls.size()-1);
+        }
+        find(ind+1,cand, t, ls);
+        
+    }
+    public List<List<Integer>> combinationSum(int[] cand, int t) {
+       
+        find(0,cand,t,new ArrayList<>());
+        return arr;
+    }
+}
